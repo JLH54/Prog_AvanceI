@@ -66,9 +66,9 @@ void AAvatar::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void AAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
+//void AAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+//{
+//	Super::SetupPlayerInputComponent(PlayerInputComponent);
+//
+//}
 
