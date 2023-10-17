@@ -6,6 +6,8 @@
 #include "Avatar.h"
 #include "Avatar_Player.generated.h"
 
+class UPotion;
+
 /**
  * 
  */
@@ -14,4 +16,10 @@ class SOULZ_API AAvatar_Player : public AAvatar
 {
 	GENERATED_BODY()
 	
+protected:
+	UFUNCTION(BlueprintCallable)
+	void Take(UPotion* PotionItem);
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<UPotion*> Inventory;
 };
