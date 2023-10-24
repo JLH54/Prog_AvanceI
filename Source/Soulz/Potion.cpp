@@ -13,7 +13,7 @@ UPotion::UPotion()
 bool UPotion::Drink(AAvatar_Player* Avatar)
 {
 	if (!Avatar) return false;
-	return false;
+	return true;
 }
 
 void UPotion::PlayPickupSound(const FVector& Location)
