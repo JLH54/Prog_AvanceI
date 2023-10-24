@@ -27,6 +27,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetPercentHealth();
 
+	UFUNCTION(BlueprintCallable)
+	bool isDead() const;
+
 	virtual float TakeDamage(float Damage,
 		struct FDamageEvent
 		const& DamageEvent,
@@ -49,7 +52,13 @@ public:
 private:
 	float CurrentHealth;
 
+	UPROPERTY(EditAnywhere)
+	float MaxHealth;
+
 	UPROPERTY(EditAnywhere, Category = "Dying")
 	bool dying;
+
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* DeathMontage;
 
 };

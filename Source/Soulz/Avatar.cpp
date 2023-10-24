@@ -8,7 +8,8 @@ AAvatar::AAvatar()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	MaxHealth = 100;
+	CurrentHealth = MaxHealth;
 }
 
 float AAvatar::GetHealth()
@@ -18,40 +19,37 @@ float AAvatar::GetHealth()
 
 float AAvatar::GetMaxHealth()
 {
-	/*if (Attribute) {
-		return Attribute->MaxHealth;
-	}*/
-	return 0.0f;
+	return MaxHealth;
 }
 
 float AAvatar::GetPercentHealth()
 {
-	float MaxHealth = GetMaxHealth();
 	if (MaxHealth > 0) {
 		return CurrentHealth / MaxHealth;
 	}
 	return 0.0f;
 }
 
+bool AAvatar::isDead() const
+{
+	return dying;
+}
+
 float AAvatar::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	float MaxHealth = GetMaxHealth();
+	MaxHealth = GetMaxHealth();
 	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0.0f, MaxHealth);
 	OnUpdateHealth();
 	if (CurrentHealth == 0) {
-		/*APaladinController* PaladinController = Cast<APaladinController>(GetController());
-		if (!PaladinController) return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);;
-		PaladinController->Dying = true;
-		USkeletalMeshComponent* MeshComponent = GetMesh();
-		if (!MeshComponent) return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);;
-		UPaladinAnimInstance* AnimInstance = Cast<UPaladinAnimInstance>(MeshComponent->GetAnimInstance());
-		if (!AnimInstance) return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);;
-		AnimInstance->Dying = true;*/
+		UAnimInstance* anim = GetMesh()->GetAnimInstance();
+		if (!anim) return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);;
+		if (!DeathMontage) return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);;
+		anim->Montage_Play(DeathMontage);
+		dying = true;
 	}
 	return Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 }
 
-// Called when the game starts or when spawned
 void AAvatar::BeginPlay()
 {
 	CurrentHealth = GetMaxHealth();
@@ -64,11 +62,3 @@ void AAvatar::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
-// Called to bind functionality to input
-//void AAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-//{
-//	Super::SetupPlayerInputComponent(PlayerInputComponent);
-//
-//}
-
