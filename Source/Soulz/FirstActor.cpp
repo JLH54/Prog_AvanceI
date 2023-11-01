@@ -7,7 +7,7 @@
 AFirstActor::AFirstActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	UE_LOG(LogTemp, Warning, TEXT("FirstActor CTor"));
 
@@ -29,9 +29,9 @@ void AFirstActor::Tick(float DeltaTime)
 	//UE_LOG(LogTemp, Warning, TEXT("FirstActor Tick"));
 	//SetActorTickEnabled(false);
 
-	FVector CurrentLocation = GetActorLocation();
+	/*FVector CurrentLocation = GetActorLocation();
 	CurrentLocation += GetActorForwardVector() * Speed * DeltaTime;
-	SetActorLocation(CurrentLocation);
+	SetActorLocation(CurrentLocation);*/
 
 }
 
