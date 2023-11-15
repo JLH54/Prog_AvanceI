@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
-
+#include "Potion.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Avatar.generated.h"
+
+class AWeapon;
 
 UCLASS()
 class SOULZ_API AAvatar : public ACharacter
@@ -14,9 +14,6 @@ class SOULZ_API AAvatar : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AAvatar();
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class UCharacterData* Attribute;
 
 	UFUNCTION(BlueprintCallable)
 	float GetHealth();
@@ -29,6 +26,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool isDead() const;
+
+	void Heal(UPotion* potion);
 
 	virtual float TakeDamage(float Damage,
 		struct FDamageEvent
@@ -43,12 +42,22 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnUpdateHealth();
 
+	UPROPERTY();
+	AWeapon* CurrentWeapon;
+
+	UPROPERTY(EditAnywhere);
+	TSubclassOf<AWeapon> StartingWeaponClass;
+
+	UFUNCTION(BlueprintCallable)
+	void BeginAttack();
+	UFUNCTION(BlueprintCallable)
+	void EndAttack();
+	UFUNCTION(BlueprintCallable)
+	void NormalAttack();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
 	float CurrentHealth;
 
@@ -60,5 +69,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* DeathMontage;
+
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* AttackMontage;
 
 };

@@ -7,11 +7,12 @@
 
 UPotion::UPotion()
 {
-	HealingPercent = 0.0f;
+	HealingPercent = 10.0f;
 }
 
 bool UPotion::Drink(AAvatar_Player* Avatar)
 {
+	//Je ne comprend pas trop pourquoi que l'on fait ceci
 	if (!Avatar) return false;
 	return true;
 }

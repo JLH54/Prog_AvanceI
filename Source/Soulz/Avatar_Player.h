@@ -27,6 +27,9 @@ public:
 		AController* EventInstigator
 		, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintCallable)
+	void Drink();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,10 +41,10 @@ protected:
 	TArray<UPotion*> Inventory;
 
 	UFUNCTION(BlueprintCallable)
-	void Drink();
+	void Interact();
 
 	UFUNCTION(BlueprintCallable)
-	void Interact();
+	int numberOfPotionInventory();
 
 public:
 	// Called every frame

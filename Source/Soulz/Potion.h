@@ -19,9 +19,10 @@ class SOULZ_API UPotion : public UObject
 public:
 	UPotion();
 	bool Drink(AAvatar_Player* Avatar);
-protected:
-	float HealingPercent;
 
+	UPROPERTY(EditAnywhere)
+	float HealingPercent;
+protected:
 	UPROPERTY(EditAnywhere)
 	USoundBase* PickUpSound;
 

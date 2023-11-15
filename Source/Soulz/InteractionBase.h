@@ -16,6 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	AInteractionBase();
 	
+protected:
 	UFUNCTION(BlueprintCallable)
 	void OnEnterInteractionZone(AAvatar_Player* other);
 
@@ -25,6 +26,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void Activate();
 
-protected:
+	UFUNCTION()
 	void OnInteractActivated();
+
+	UFUNCTION(BlueprintCallable)
+	bool hasBeenPressed();
+
+	UFUNCTION(BlueprintCallable)
+	void pressed();
+
+	bool isPressed;
 };
