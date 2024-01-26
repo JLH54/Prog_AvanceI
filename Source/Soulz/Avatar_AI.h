@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Avatar.h"
+#include "Avatar_Player.h"
 #include "Avatar_AI.generated.h"
 
 enum class EAIState : uint8 {
@@ -36,6 +37,10 @@ protected:
 
 	void UpdateIdleState(float DeltaTime);
 	void UpdateWanderState();
+	void UpdateChaseState();
+	void UpdateAttackState();
+	void UpdateReturnState();
+	void UpdateDeadState();
 
 	FVector PickRandomDestination(const FVector& center, const float Range);
 
@@ -66,11 +71,19 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float StoppingDistance;
 
-
 	FVector SpawnLocation;
 
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere)
 	bool bIsDebug = false;
+
+	UPROPERTY(EditAnywhere)
+	AAvatar_Player* target;
+
+	UFUNCTION(BlueprintCallable)
+	void SetTarget(AAvatar_Player* player);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveTarget();
 };

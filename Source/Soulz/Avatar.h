@@ -67,6 +67,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Dying")
 	bool dying;
 
+protected:
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* DeathMontage;
 
